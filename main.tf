@@ -55,7 +55,6 @@ module "alb" {
 
   # Security Group
   security_groups = [module.blog_sg.security_group_id]
- 
 
   listeners = {
     ex-http-https-redirect = {
@@ -80,7 +79,7 @@ module "alb" {
 
   target_groups = {
     ex-instance = {
-      name_prefix      = "blog"
+      name_prefix      = "blog-"
       protocol         = "HTTP"
       port             = 80
       target_type      = "instance"
@@ -88,11 +87,10 @@ module "alb" {
   }
 
   tags = {
-    Environment = "Dev"
+    Environment = "dev"
     Project     = "Example"
   }
 }
-
 
 module "blog_sg" {
   source  = "terraform-aws-modules/security-group/aws"
